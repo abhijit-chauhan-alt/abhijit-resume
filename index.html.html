@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Abhijit Chauhan — Aspiring Data Scientist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1b1c;
+    --bg-panel: #12292b;
+    --bg-panel-2: #163234;
+    --grid-line: rgba(237,234,224,0.045);
+    --text: #ece7db;
+    --text-muted: #94a6a2;
+    --text-dim: #5f7572;
+    --accent: #d7a94e;
+    --accent-2: #58b596;
+    --accent-2-dim: rgba(88,181,150,0.15);
+    --accent-dim: rgba(215,169,78,0.15);
+    --border: #23423f;
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Inter', sans-serif;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    overflow-x:hidden;
+  }
+
+  ::selection{ background:var(--accent); color:#0d1b1c; }
+
+  a{ color:var(--accent-2); text-decoration:none; }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 28px; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter:blur(10px);
+    background:rgba(13,27,28,0.82);
+    border-bottom:1px solid var(--border);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding:16px 28px; }
+  .brand{ font-family:var(--mono); font-weight:700; font-size:15px; letter-spacing:0.5px; color:var(--text); }
+  .brand span{ color:var(--accent-2); }
+  .navlinks{ display:flex; gap:26px; font-family:var(--mono); font-size:12.5px; }
+  .navlinks a{ color:var(--text-muted); transition:color .2s; }
+  .navlinks a:hover{ color:var(--accent); }
+  .navlinks .num{ color:var(--text-dim); margin-right:4px; }
+
+  /* ---------- HERO / TERMINAL ---------- */
+  header.hero{ padding:90px 0 60px; }
+  .term{
+    background:var(--bg-panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 30px 60px -25px rgba(0,0,0,0.6);
+  }
+  .term-bar{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 16px;
+    background:var(--bg-panel-2);
+    border-bottom:1px solid var(--border);
+  }
+  .dot{ width:10px; height:10px; border-radius:50%; }
+  .dot.r{background:#e5716a;} .dot.y{background:#e3b34f;} .dot.g{background:#5cbf8f;}
+  .term-title{ margin-left:10px; font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+  .term-body{ padding:30px 28px 34px; font-family:var(--mono); font-size:14px; }
+  .term-line{ color:var(--text-muted); margin-bottom:6px; }
+  .term-line .prompt{ color:var(--accent-2); }
+  .term-out{ color:var(--text); font-size:34px; font-weight:800; line-height:1.25; margin:14px 0 10px; letter-spacing:-0.5px; }
+  .term-out .cursor{ display:inline-block; width:11px; height:30px; background:var(--accent); margin-left:4px; vertical-align:-5px; animation:blink 1s step-end infinite; }
+  @keyframes blink{ 50%{ opacity:0; } }
+  .role-line{ font-family:var(--mono); font-size:15px; color:var(--accent); margin-bottom:18px; min-height:22px; }
+  .term-desc{ font-family:var(--sans); color:var(--text-muted); font-size:15.5px; max-width:520px; margin-bottom:22px; }
+  .tagline{ font-family:var(--mono); font-size:12.5px; color:var(--text-dim); border-top:1px dashed var(--border); padding-top:16px; }
+
+  .cta-row{ display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono); font-size:13px; font-weight:600;
+    padding:11px 20px; border-radius:6px; border:1px solid var(--border);
+    transition:all .2s;
+  }
+  .btn.primary{ background:var(--accent); color:#0d1b1c; border-color:var(--accent); }
+  .btn.primary:hover{ background:#e6ba63; }
+  .btn.ghost{ color:var(--text); }
+  .btn.ghost:hover{ border-color:var(--accent-2); color:var(--accent-2); }
+
+  /* ---------- SECTION SHARED ---------- */
+  section{ padding:64px 0; border-top:1px solid var(--border); }
+  .eyebrow{ font-family:var(--mono); font-size:12px; color:var(--accent-2); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px; }
+  h2.sec-title{ font-family:var(--mono); font-size:26px; font-weight:700; margin-bottom:30px; letter-spacing:-0.3px; }
+  .fade-up{ opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease; }
+  .fade-up.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:1.3fr 1fr; gap:40px; }
+  .about-grid p{ color:var(--text-muted); font-size:15.5px; margin-bottom:14px; }
+  .about-grid p strong{ color:var(--text); font-weight:600; }
+  .stat-card{ background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:18px 20px; margin-bottom:12px; }
+  .stat-card .k{ font-family:var(--mono); font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; }
+  .stat-card .v{ font-family:var(--mono); font-size:15px; color:var(--accent); font-weight:600; margin-top:4px; }
+
+  /* ---------- SKILLS ---------- */
+  .skill-block{ margin-bottom:26px; }
+  .skill-block h3{ font-family:var(--mono); font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:12px; font-weight:600; }
+  .chip-row{ display:flex; flex-wrap:wrap; gap:10px; }
+  .chip{
+    font-family:var(--mono); font-size:13px; padding:8px 14px;
+    background:var(--bg-panel); border:1px solid var(--border); border-radius:20px;
+    color:var(--text); position:relative;
+  }
+  .chip::before{ content:'●'; color:var(--accent-2); margin-right:8px; font-size:8px; }
+  .chip.core::before{ color:var(--accent); }
+
+  /* ---------- LEARNING PATH (signature dataset viz) ---------- */
+  .path{ position:relative; padding-left:6px; }
+  .path-row{ display:grid; grid-template-columns:150px 1fr; gap:18px; align-items:center; padding:13px 0; border-bottom:1px solid var(--border); }
+  .path-row:last-child{ border-bottom:none; }
+  .path-label{ font-family:var(--mono); font-size:13.5px; color:var(--text); }
+  .bar-track{ height:8px; background:var(--bg-panel); border-radius:4px; overflow:hidden; border:1px solid var(--border); }
+  .bar-fill{ height:100%; border-radius:4px; background:linear-gradient(90deg, var(--accent-2), var(--accent)); width:0%; transition:width 1.1s cubic-bezier(.2,.8,.2,1); }
+
+  /* ---------- INTERESTS ---------- */
+  .interest-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .interest-card{ background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:20px; }
+  .interest-card .glyph{ font-family:var(--mono); color:var(--accent-2); font-size:12px; margin-bottom:10px; }
+  .interest-card h4{ font-size:15.5px; margin-bottom:6px; font-weight:600; }
+  .interest-card p{ color:var(--text-muted); font-size:13.5px; }
+
+  /* ---------- EDUCATION / TIMELINE ---------- */
+  .tl{ position:relative; padding-left:26px; border-left:1px dashed var(--border); }
+  .tl-item{ position:relative; padding-bottom:30px; }
+  .tl-item:last-child{ padding-bottom:0; }
+  .tl-item::before{ content:''; position:absolute; left:-31px; top:4px; width:9px; height:9px; border-radius:50%; background:var(--accent); box-shadow:0 0 0 4px var(--accent-dim); }
+  .tl-date{ font-family:var(--mono); font-size:12px; color:var(--accent-2); margin-bottom:4px; }
+  .tl-title{ font-weight:600; font-size:16px; margin-bottom:4px; }
+  .tl-desc{ color:var(--text-muted); font-size:14px; }
+
+  /* ---------- LOOKING FOR ---------- */
+  .seek-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; }
+  .seek-item{ display:flex; gap:12px; align-items:flex-start; background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:16px 18px; }
+  .seek-item .idx{ font-family:var(--mono); color:var(--accent); font-size:13px; font-weight:700; }
+  .seek-item p{ font-size:14px; color:var(--text-muted); }
+  .seek-item strong{ color:var(--text); }
+
+  /* ---------- TESTIMONIALS & FEEDBACK ---------- */
+  .testi-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:44px; }
+  .testi-card{ background:var(--bg-panel); border:1px solid var(--border); border-radius:8px; padding:22px; position:relative; }
+  .testi-card .quote-mark{ font-family:var(--mono); font-size:28px; color:var(--accent); line-height:1; margin-bottom:8px; display:block; }
+  .testi-card p.quote{ color:var(--text-muted); font-size:14px; margin-bottom:16px; font-style:italic; }
+  .testi-who{ font-family:var(--mono); font-size:12.5px; color:var(--text); }
+  .testi-who span{ display:block; color:var(--text-dim); font-size:11.5px; margin-top:2px; font-style:normal; }
+
+  .feedback-box{ background:var(--bg-panel); border:1px solid var(--border); border-radius:10px; padding:30px; }
+  .feedback-box h3{ font-family:var(--mono); font-size:15px; margin-bottom:6px; }
+  .feedback-box .sub{ color:var(--text-muted); font-size:13.5px; margin-bottom:22px; }
+  .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; }
+  .form-field{ display:flex; flex-direction:column; gap:6px; }
+  .form-field.full{ grid-column:1 / -1; }
+  .form-field label{ font-family:var(--mono); font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.5px; }
+  .form-field input, .form-field textarea{
+    background:var(--bg); border:1px solid var(--border); border-radius:6px;
+    padding:11px 13px; color:var(--text); font-family:var(--sans); font-size:14px;
+    resize:vertical;
+  }
+  .form-field input:focus, .form-field textarea:focus{ outline:none; border-color:var(--accent-2); }
+  .rating-row{ display:flex; gap:6px; margin-top:4px; }
+  .star{ font-size:22px; color:var(--border); cursor:pointer; transition:color .15s; user-select:none; }
+  .star.active, .star:hover{ color:var(--accent); }
+  .form-submit{ margin-top:6px; }
+  .form-note{ font-family:var(--mono); font-size:11px; color:var(--text-dim); margin-top:14px; }
+  .form-success{ display:none; font-family:var(--mono); font-size:13px; color:var(--accent-2); margin-top:16px; }
+
+
+  footer{ padding:70px 0 50px; border-top:1px solid var(--border); text-align:center; }
+  footer .eyebrow{ justify-content:center; display:block; }
+  footer h2{ font-family:var(--mono); font-size:30px; margin-bottom:14px; }
+  footer p{ color:var(--text-muted); margin-bottom:26px; }
+  .contact-row{ display:flex; justify-content:center; gap:14px; flex-wrap:wrap; margin-bottom:40px; }
+  .foot-note{ font-family:var(--mono); font-size:12px; color:var(--text-dim); }
+  .foot-note .blink{ color:var(--accent); animation:blink 1.2s step-end infinite; }
+
+  @media(max-width:720px){
+    .about-grid, .interest-grid, .seek-grid, .testi-grid, .form-row{ grid-template-columns:1fr; }
+    .term-out{ font-size:24px; }
+    .navlinks{ display:none; }
+    .path-row{ grid-template-columns:110px 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">abhijit<span>@</span>chauhan</div>
+    <div class="navlinks">
+      <a href="#about"><span class="num">01</span>about</a>
+      <a href="#skills"><span class="num">02</span>skills</a>
+      <a href="#interests"><span class="num">03</span>interests</a>
+      <a href="#education"><span class="num">04</span>education</a>
+      <a href="#reviews"><span class="num">05</span>reviews</a>
+      <a href="#contact"><span class="num">06</span>contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="term">
+      <div class="term-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="term-title">~/abhijit-chauhan — profile.py</span>
+      </div>
+      <div class="term-body">
+        <div class="term-line"><span class="prompt">&gt;</span> whoami</div>
+        <div class="term-out">Abhijit Chauhan<span class="cursor"></span></div>
+        <div class="role-line" id="roleTyper"></div>
+        <div class="term-desc">BCA 2nd-year student building toward a career in <strong style="color:var(--text)">Data Science &amp; AI/ML</strong> — training models, cleaning datasets, and hunting for patterns in between semesters.</div>
+        <div class="tagline">🚀 Currently learning. Constantly exploring. Building toward AI/ML.</div>
+      </div>
+    </div>
+    <div class="cta-row">
+      <a href="#contact" class="btn primary">Get in touch</a>
+      <a href="#skills" class="btn ghost">View skill set</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap fade-up">
+    <div class="eyebrow">01 / About</div>
+    <h2 class="sec-title">// the short version</h2>
+    <div class="about-grid">
+      <div>
+        <p>I'm a <strong>BCA 2nd-year student</strong> with a strong pull toward <strong>Data Science, Artificial Intelligence, and Machine Learning</strong>. Most of my time outside class goes into building AI/ML models, working with data, and finding efficient ways to solve problems.</p>
+        <p>I'd describe myself as a <strong>curious, creative self-learner</strong> — someone who enjoys exploring new technologies rather than waiting for a syllabus to introduce them. I'm continuously sharpening my technical foundation and preparing myself for a role as a <strong>Data Scientist / AI-ML Engineer</strong>.</p>
+        <p>Right now, I'm especially drawn to <strong>SQL and Excel-driven data analysis</strong> — the kind of work where raw numbers turn into a story.</p>
+      </div>
+      <div>
+        <div class="stat-card"><div class="k">Currently</div><div class="v">BCA — 2nd Year</div></div>
+        <div class="stat-card"><div class="k">Focus areas</div><div class="v">Data Science · AI · ML</div></div>
+        <div class="stat-card"><div class="k">Working style</div><div class="v">Curious · Creative · Self-taught</div></div>
+        <div class="stat-card"><div class="k">Target role</div><div class="v">Data Scientist / AI-ML Engineer</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap fade-up">
+    <div class="eyebrow">02 / Skills</div>
+    <h2 class="sec-title">// tech stack</h2>
+
+    <div class="skill-block">
+      <h3>Languages &amp; tools</h3>
+      <div class="chip-row">
+        <span class="chip core">Python</span>
+        <span class="chip core">SQL</span>
+        <span class="chip">Excel</span>
+        <span class="chip">HTML</span>
+        <span class="chip">CSS</span>
+        <span class="chip">JavaScript</span>
+      </div>
+    </div>
+
+    <div class="skill-block">
+      <h3>In progress</h3>
+      <div class="chip-row">
+        <span class="chip">Data Analysis</span>
+        <span class="chip">Statistics</span>
+        <span class="chip">DSA</span>
+        <span class="chip">Artificial Intelligence</span>
+        <span class="chip">Machine Learning</span>
+      </div>
+    </div>
+
+    <div class="skill-block" style="margin-top:36px;">
+      <h3>Learning momentum</h3>
+      <div class="path">
+        <div class="path-row"><span class="path-label">Python</span><div class="bar-track"><div class="bar-fill" data-w="80"></div></div></div>
+        <div class="path-row"><span class="path-label">SQL</span><div class="bar-track"><div class="bar-fill" data-w="70"></div></div></div>
+        <div class="path-row"><span class="path-label">Excel</span><div class="bar-track"><div class="bar-fill" data-w="75"></div></div></div>
+        <div class="path-row"><span class="path-label">Statistics</span><div class="bar-track"><div class="bar-fill" data-w="55"></div></div></div>
+        <div class="path-row"><span class="path-label">DSA</span><div class="bar-track"><div class="bar-fill" data-w="50"></div></div></div>
+        <div class="path-row"><span class="path-label">Machine Learning</span><div class="bar-track"><div class="bar-fill" data-w="40"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="interests">
+  <div class="wrap fade-up">
+    <div class="eyebrow">03 / Interests</div>
+    <h2 class="sec-title">// what I like building with</h2>
+    <div class="interest-grid">
+      <div class="interest-card">
+        <div class="glyph">[ model ]</div>
+        <h4>AI / ML Models</h4>
+        <p>Designing and training models that learn from real data instead of hardcoded rules.</p>
+      </div>
+      <div class="interest-card">
+        <div class="glyph">[ pattern ]</div>
+        <h4>Discovering Patterns</h4>
+        <p>Digging through datasets to find the signal — trends, correlations, outliers.</p>
+      </div>
+      <div class="interest-card">
+        <div class="glyph">[ query ]</div>
+        <h4>SQL &amp; Excel Analysis</h4>
+        <p>Turning raw tables into clear, decision-ready insight.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap fade-up">
+    <div class="eyebrow">04 / Education</div>
+    <h2 class="sec-title">// timeline</h2>
+    <div class="tl">
+      <div class="tl-item">
+        <div class="tl-date">Ongoing</div>
+        <div class="tl-title">Bachelor of Computer Applications (BCA) — 2nd Year</div>
+        <div class="tl-desc">Pranveer Singh Institute of Higher Education (PSIT) — building a foundation across programming, databases, and core CS concepts while self-studying Data Science and AI/ML on the side.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-date">Ongoing</div>
+        <div class="tl-title">Self-directed learning — Data Science &amp; AI/ML</div>
+        <div class="tl-desc">Statistics, Data Structures &amp; Algorithms, Data Analysis, and Machine Learning fundamentals, learned outside the classroom.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:44px;">
+      <h3 style="font-family:var(--mono); font-size:13px; color:var(--text-dim); text-transform:uppercase; letter-spacing:1px; margin-bottom:16px;">Looking forward to</h3>
+      <div class="seek-grid">
+        <div class="seek-item"><span class="idx">→</span><p><strong>Internships</strong> in Data Science / AI-ML</p></div>
+        <div class="seek-item"><span class="idx">→</span><p><strong>Networking</strong> with people in the field</p></div>
+        <div class="seek-item"><span class="idx">→</span><p><strong>Learning from industry professionals</strong></p></div>
+        <div class="seek-item"><span class="idx">→</span><p><strong>Collaborative projects</strong> in AI/ML &amp; Data Science</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap fade-up">
+    <div class="eyebrow">05 / Reviews</div>
+    <h2 class="sec-title">// what people say</h2>
+
+    <div class="testi-grid">
+      <div class="testi-card">
+        <span class="quote-mark">“</span>
+        <p class="quote">Add a short quote here from a teacher, mentor, or teammate about working with you.</p>
+        <div class="testi-who">Name<span>Role / Institution — PSIT</span></div>
+      </div>
+      <div class="testi-card">
+        <span class="quote-mark">“</span>
+        <p class="quote">Add a second testimonial here — a professor, project partner, or club coordinator works well.</p>
+        <div class="testi-who">Name<span>Role / Institution</span></div>
+      </div>
+    </div>
+
+    <div class="feedback-box">
+      <h3>// leave_feedback.py</h3>
+      <p class="sub">Know Abhijit or reviewing this page? Drop a quick note — it helps.</p>
+
+      <form id="feedbackForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="form-row">
+          <div class="form-field">
+            <label for="fb-name">Name</label>
+            <input id="fb-name" name="name" type="text" placeholder="Your name" required>
+          </div>
+          <div class="form-field">
+            <label for="fb-email">Email (optional)</label>
+            <input id="fb-email" name="email" type="email" placeholder="you@example.com">
+          </div>
+        </div>
+        <div class="form-field full" style="margin-bottom:14px;">
+          <label>Rating</label>
+          <div class="rating-row" id="starRow">
+            <span class="star" data-v="1">★</span>
+            <span class="star" data-v="2">★</span>
+            <span class="star" data-v="3">★</span>
+            <span class="star" data-v="4">★</span>
+            <span class="star" data-v="5">★</span>
+          </div>
+          <input type="hidden" name="rating" id="fb-rating" value="">
+        </div>
+        <div class="form-field full" style="margin-bottom:18px;">
+          <label for="fb-msg">Message</label>
+          <textarea id="fb-msg" name="message" rows="4" placeholder="Your feedback or review..." required></textarea>
+        </div>
+        <button type="submit" class="btn primary form-submit">Submit review</button>
+        <div class="form-success" id="fbSuccess">✓ Thanks — your feedback was sent.</div>
+      </form>
+      <div class="form-note">Powered by Formspree — replace YOUR_FORM_ID with your own free form endpoint from formspree.io</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap fade-up">
+    <div class="eyebrow">06 / Contact</div>
+    <h2>Let's build something with data.</h2>
+    <p>Open to internships, collaborations, and conversations about Data Science &amp; AI/ML.</p>
+    <div class="contact-row">
+      <a href="mailto:abhijitchauhan501@gmail.com" class="btn primary">abhijitchauhan501@gmail.com</a>
+      <a href="#" class="btn ghost">LinkedIn</a>
+      <a href="#" class="btn ghost">GitHub</a>
+    </div>
+    <div class="foot-note">&gt; end_of_file<span class="blink">_</span></div>
+  </div>
+</footer>
+
+<script>
+  // Typewriter role rotation
+  const roles = ["Aspiring Data Scientist", "AI / ML Enthusiast", "Curious Self-Learner", "Pattern Hunter"];
+  const roleEl = document.getElementById('roleTyper');
+  let ri = 0, ci = 0, deleting = false;
+
+  function typeLoop(){
+    const current = roles[ri];
+    if(!deleting){
+      ci++;
+      roleEl.textContent = current.slice(0, ci);
+      if(ci === current.length){ deleting = true; setTimeout(typeLoop, 1400); return; }
+    } else {
+      ci--;
+      roleEl.textContent = current.slice(0, ci);
+      if(ci === 0){ deleting = false; ri = (ri+1) % roles.length; }
+    }
+    setTimeout(typeLoop, deleting ? 35 : 65);
+  }
+  typeLoop();
+
+  // Star rating
+  const stars = document.querySelectorAll('#starRow .star');
+  const ratingInput = document.getElementById('fb-rating');
+  stars.forEach(star=>{
+    star.addEventListener('click', ()=>{
+      const v = parseInt(star.dataset.v);
+      ratingInput.value = v;
+      stars.forEach(s=> s.classList.toggle('active', parseInt(s.dataset.v) <= v));
+    });
+  });
+
+  // Feedback form submit (works once YOUR_FORM_ID is replaced with a real Formspree endpoint)
+  const feedbackForm = document.getElementById('feedbackForm');
+  const fbSuccess = document.getElementById('fbSuccess');
+  feedbackForm.addEventListener('submit', function(e){
+    if(feedbackForm.action.includes('YOUR_FORM_ID')){
+      e.preventDefault();
+      alert('Form endpoint not set up yet — see the note below the form to connect it via Formspree.');
+      return;
+    }
+    e.preventDefault();
+    fetch(feedbackForm.action, {
+      method:'POST',
+      body:new FormData(feedbackForm),
+      headers:{ 'Accept':'application/json' }
+    }).then(res=>{
+      if(res.ok){
+        fbSuccess.style.display = 'block';
+        feedbackForm.reset();
+        stars.forEach(s=> s.classList.remove('active'));
+      } else {
+        alert('Something went wrong sending your feedback. Please try again.');
+      }
+    }).catch(()=> alert('Something went wrong sending your feedback. Please try again.'));
+  });
+
+  const observer = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('in'); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el=>observer.observe(el));
+
+  // Skill bar fill on scroll
+  const barObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.querySelectorAll('.bar-fill').forEach(bar=>{
+          bar.style.width = bar.dataset.w + '%';
+        });
+        barObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll('.path').forEach(el=>barObserver.observe(el));
+</script>
+
+</body>
+</html>
